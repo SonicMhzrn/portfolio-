@@ -1,0 +1,31 @@
+<div class="fixed bottom-6 right-6 z-[9999] flex flex-col gap-3 max-w-sm w-full pointer-events-none px-4">
+  <div
+    *ngFor="let toast of Toasts; trackBy: TrackById"
+    class="pointer-events-auto flex items-start gap-3 p-4 rounded-2xl shadow-2xl border backdrop-blur-md transition-all duration-500"
+    style="animation: slideInRight 0.4s cubic-bezier(0.34, 1.2, 0.64, 1) both"
+    [ngClass]="{
+      'bg-emerald-950/90 border-emerald-500/30 text-emerald-100': toast.type === ToastEnum.Success,
+      'bg-red-950/90 border-red-500/30 text-red-100': toast.type === ToastEnum.Error,
+      'bg-slate-900/90 border-slate-500/30 text-slate-100': toast.type === ToastEnum.Info
+    }"
+  >
+    <!-- Icon -->
+    <div class="flex-shrink-0 w-8 h-8 rounded-xl flex items-center justify-center text-sm font-black"
+      [ngClass]="{
+        'bg-emerald-500/20 text-emerald-400': toast.type === ToastEnum.Success,
+        'bg-red-500/20 text-red-400': toast.type === ToastEnum.Error,
+        'bg-blue-500/20 text-blue-400': toast.type === ToastEnum.Info
+      }">
+      <span *ngIf="toast.type === ToastEnum.Success">✓</span>
+      <span *ngIf="toast.type === ToastEnum.Error">✕</span>
+      <span *ngIf="toast.type === ToastEnum.Info">i</span>
+    </div>
+    <!-- Message -->
+    <p class="flex-1 text-sm font-medium leading-snug pt-0.5">{{ toast.message }}</p>
+    <!-- Close -->
+    <button (click)="Dismiss(toast.id)"
+      class="flex-shrink-0 text-current opacity-40 hover:opacity-100 transition-opacity text-xl leading-none cursor-pointer -mt-0.5">
+      ×
+    </button>
+  </div>
+</div>

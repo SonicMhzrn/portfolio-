@@ -1,0 +1,51 @@
+<section id="skills" class="py-28 px-6 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-violet-950/5 to-transparent pointer-events-none">
+  </div>
+  <div
+    class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[700px] h-[400px] bg-violet-600/5 rounded-full blur-3xl pointer-events-none">
+  </div>
+
+  <div class="max-w-6xl mx-auto relative">
+    <div class="section-header" [ngClass]="IsVisible ? 'animate-slide-up' : 'opacity-0 translate-y-8'">
+      <span class="section-label">Expertise</span>
+      <h2 class="section-title">My <span class="hero-gradient-text">Skills</span></h2>
+      <p class="section-subtitle">Tools and technologies I work with daily, spanning frontend to backend and databases.
+      </p>
+    </div>
+
+    <!-- Category filter -->
+    <div class="flex flex-wrap justify-center gap-2 mt-10 mb-12">
+      <button *ngFor="let Cat of Categories" (click)="SelectCategory(Cat)"
+        class="px-5 py-2 rounded-full text-sm font-semibold transition-all duration-300 cursor-pointer"
+        [ngClass]="SelectedCategory === Cat
+          ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/25'
+          : 'bg-[var(--bg-card)] text-[var(--text-muted)] border border-[var(--border)] hover:border-violet-500/40 hover:text-[var(--text)]'">
+        {{ Cat }}
+      </button>
+    </div>
+
+    <!-- Skills grid -->
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div *ngFor="let Skill of FilteredSkills; let i = index" class="skill-card group"
+        [style.animation-delay]="IsVisible ? (i * 60) + 'ms' : '0ms'"
+        [ngClass]="IsVisible ? 'animate-fade-in-up' : 'opacity-0 translate-y-6'">
+
+        <div class="flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div class="skill-icon flex items-center justify-center">
+              <i [class]="Skill.Icon + ' text-2xl'"></i>
+            </div>
+            <div>
+              <h3 class="text-[var(--text)] font-bold text-sm">{{ Skill.Name }}</h3>
+              <span class="text-[var(--text-subtle)] text-xs">{{ Skill.Category }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="FilteredSkills.length === 0" class="text-center py-16 text-[var(--text-subtle)]">
+      No skills found in this category.
+    </div>
+  </div>
+</section>

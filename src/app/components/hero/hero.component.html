@@ -1,0 +1,79 @@
+<section id="hero" class="relative min-h-screen flex items-center justify-center overflow-hidden px-6">
+
+  <!-- Animated background blobs -->
+  <div class="absolute inset-0 pointer-events-none overflow-hidden">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+    <div class="absolute inset-0 opacity-[0.04]"
+      style="background-image: radial-gradient(circle, var(--accent) 1px, transparent 1px); background-size: 36px 36px;">
+    </div>
+  </div>
+
+  <div class="relative max-w-6xl mx-auto text-center z-10 pt-24"
+    [ngClass]="IsVisible ? 'animate-fade-in' : 'opacity-0'">
+
+    <!-- Available badge -->
+    <div *ngIf="Info?.AvailableForWork" class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full
+             bg-emerald-500/10 border border-emerald-500/20 text-emerald-400
+             text-sm font-semibold mb-8 hover:bg-emerald-500/15 transition-colors duration-300">
+      <span class="relative flex w-2.5 h-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-400"></span>
+      </span>
+      Available for new opportunities
+    </div>
+
+    <!-- Name -->
+    <h1 class="text-5xl md:text-7xl lg:text-8xl font-black mb-5 leading-[1.05] tracking-tight text-[var(--text)]">
+      Hi, I'm
+      <span class="hero-gradient-text"> {{ Info?.Name }}</span>
+    </h1>
+
+    <!-- Typing -->
+    <p class="text-2xl md:text-4xl font-bold text-gray-300 mb-6 h-12">
+      A <span class="text-violet-400">{{ DisplayWord }}</span>
+      <span class="animate-pulse text-violet-400">|</span>
+    </p>
+
+    <!-- Tagline -->
+    <p class="text-[var(--text-muted)] text-lg md:text-xl max-w-2xl mx-auto mb-12 leading-relaxed">
+      {{ Info?.Tagline }}
+    </p>
+
+    <!-- CTAs -->
+    <div class="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+      <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+        class="cta-primary cursor-pointer">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+            d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+        </svg>
+        Get In Touch
+      </button>
+      <button onclick="document.getElementById('projects').scrollIntoView({behavior:'smooth'})"
+        class="cta-secondary cursor-pointer">
+        View My Work
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+        </svg>
+      </button>
+    </div>
+
+    <!-- Stats row -->
+    <div *ngIf="Info?.ShowExperience" class="flex flex-wrap justify-center gap-8 text-center">
+      <div *ngFor="let Stat of Stats" class="group">
+        <div class="text-3xl font-black hero-gradient-text mb-1">{{ Stat.Value }}</div>
+        <div class="text-[var(--text-subtle)] text-xs font-medium uppercase tracking-wider">{{ Stat.Label }}</div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div
+    class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-[var(--text-subtle)] z-10">
+    <span class="text-xs uppercase tracking-widest">Scroll</span>
+    <div class="w-[1px] h-8 bg-gradient-to-b from-violet-400 to-transparent animate-pulse-slow"></div>
+  </div>
+</section>

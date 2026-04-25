@@ -1,0 +1,80 @@
+<section id="about" class="py-28 px-6 relative overflow-hidden">
+  <div class="absolute top-0 right-0 w-[500px] h-[500px] bg-violet-600/5 rounded-full blur-3xl pointer-events-none"></div>
+
+  <div class="max-w-6xl mx-auto">
+    <div class="section-header"
+      [ngClass]="IsVisible ? 'animate-slide-up' : 'opacity-0 translate-y-8'">
+      <span class="section-label">About Me</span>
+      <h2 class="section-title">Turning ideas into <span class="hero-gradient-text">reality</span></h2>
+    </div>
+
+    <div class="grid md:grid-cols-2 gap-14 items-center mt-16">
+      <!-- Avatar column -->
+      <div class="flex flex-col items-center gap-6"
+        [ngClass]="IsVisible ? 'animate-slide-right' : 'opacity-0 translate-x-8'">
+        <div class="relative group">
+          <div class="absolute -inset-4 bg-gradient-to-br from-violet-500/20 to-indigo-500/20 rounded-3xl blur-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="absolute inset-0 bg-gradient-to-br from-violet-500 to-indigo-600 rounded-2xl blur-2xl opacity-20 scale-110"></div>
+          <img [src]="Info?.Avatar" [alt]="Info?.Name"
+            class="relative w-72 h-72 rounded-2xl border-2 border-violet-500/20 object-cover bg-[var(--bg-card)] shadow-2xl group-hover:scale-[1.02] transition-transform duration-500"/>
+          <div class="absolute -bottom-4 -right-4 px-4 py-2 rounded-2xl bg-violet-600 text-white text-sm font-bold shadow-xl shadow-violet-500/30">
+            Full Stack Dev
+          </div>
+        </div>
+
+        <!-- Info chips -->
+        <div class="flex gap-3 flex-wrap justify-center mt-4">
+          <span class="info-chip">📍 {{ Info?.Location }}</span>
+          <span class="info-chip status-chip" *ngIf="Info?.AvailableForWork">
+            <span class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></span>
+            Open to Work
+          </span>
+        </div>
+      </div>
+
+      <!-- Text column -->
+      <div class="flex flex-col gap-6"
+        [ngClass]="IsVisible ? 'animate-slide-left' : 'opacity-0 -translate-x-8'">
+        <p class="text-[var(--text-muted)] text-lg leading-relaxed">
+          {{ Info?.Bio }}
+        </p>
+        <!-- <p class="text-[var(--text-muted)] leading-relaxed">
+          When I'm not coding, you'll find me contributing to open source, writing technical articles,
+          or exploring the latest in AI and developer tooling.
+        </p> -->
+
+        <!-- Experience timeline -->
+        <div class="space-y-4 mt-2">
+          <div *ngFor="let Exp of Experience; let i = index"
+            class="timeline-item"
+            [style.animation-delay]="(i * 100) + 'ms'">
+            <div class="timeline-dot"></div>
+            <div class="ml-4">
+              <div class="flex flex-wrap items-center gap-x-3 gap-y-1 mb-1">
+                <span class="text-[var(--text)] font-bold text-sm">{{ Exp.Role }}</span>
+                <span class="text-violet-400 text-xs font-semibold">{{ Exp.Company }}</span>
+                <span class="text-[var(--text-subtle)] text-xs">{{ Exp.Period }}</span>
+              </div>
+              <p class="text-[var(--text-muted)] text-xs leading-relaxed">{{ Exp.Description }}</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="flex flex-wrap gap-3 pt-2">
+          <a [href]="Info?.ResumeUrl"
+            class="cta-primary text-sm py-3 px-6 cursor-pointer">
+            <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 10v6m0 0l-3-3m3 3l3-3M3 17V7a2 2 0 012-2h6l2 2h6a2 2 0 012 2v8a2 2 0 01-2 2H5a2 2 0 01-2-2z"/>
+            </svg>
+            Download Resume
+          </a>
+          <button onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})"
+            class="cta-secondary text-sm py-3 px-6 cursor-pointer">
+            Let's Talk
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
